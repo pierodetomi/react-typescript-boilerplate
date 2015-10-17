@@ -1,0 +1,14 @@
+body {
+	font-family: Helvetica, Verdana, sans-serif;
+}
+
+.father {
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+
+.children-container {
+	margin-left: 20px;
+	border-left: solid 1px #000;
+	padding-left: 5px;
+}
