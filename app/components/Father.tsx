@@ -5,25 +5,36 @@ class FatherProps {
 }
 
 class Father extends React.Component<FatherProps, any> {
-	private children: string[];
+	public state: any;
 	
 	constructor(props: FatherProps) {
 		super(props);
 		
-		this.children = ["child 1", "child 2"];
+		this.state = {
+			children: app.itemStore.getItems()
+		};
+		
+		var self: Father = this;
+		
+		app.itemStore.addListener((payload: IFluxPayload): void => {
+			self.setState(app.itemStore.getItems());
+		});
+		
+		// var self: Father = this;
+		//  
+		// setInterval(() => {
+		// 	var children: Item[] = self.state.children;
+		// 	children.push({ id: children.length, name: "item " + children.length.toString() });
+		// 	self.setState(children);
+		// }, 1500);
 	}
 	
 	render() {
 		return (
 			<div>
 				<p className="father">Father: {this.props.name}, age {this.props.age}.</p>
-				<Children children={this.children} />
+				<Children children={this.state.children} />
 			</div>
 		);
 	}
 }
-
-ReactDOM.render(
-	<Father name="John Doe" age="30" />,
-	document.getElementById("test")
-);

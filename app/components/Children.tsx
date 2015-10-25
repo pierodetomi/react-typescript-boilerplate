@@ -1,5 +1,5 @@
 class ChildrenProps {
-	public children: string[];
+	public children: Item[];
 }
 
 class Children extends React.Component<ChildrenProps, any> {
@@ -8,12 +8,9 @@ class Children extends React.Component<ChildrenProps, any> {
 	}
 	
 	render() {
-		var index: number = 0;
-		var childNodes = this.props.children.map(function(child: string): any {
-			index++;
-			
+		var childNodes = this.props.children.map(function(child: Item): any {
 			return (
-				<div key={index-1}>Child: {child}</div>
+				<div key={child.id} onClick={function(e) { ItemActions.remove(child.id); }}>Item: {child.name}</div>
 			);
 		});
 		
